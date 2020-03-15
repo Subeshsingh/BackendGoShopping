@@ -3,6 +3,7 @@ const app = express();
 const port = 8000;
 const bodyParser = require('body-parser');
 const db = require('./queries');
+const auth = require('./authQueries');
 const data = require('./album.json');
 const cors= require('cors');
 const fileupload =require('express-fileupload');
@@ -30,6 +31,6 @@ app.get('/products/:id',db.getProductById);
 app.post('/products',db.createProduct);
 app.put('products/:id',db.updateProduct);
 app.delete('/products/:id',db.deleteProduct);
-
-
+app.post('/login',auth.userLogin);
+app.post('/signup',auth.userSignup);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
