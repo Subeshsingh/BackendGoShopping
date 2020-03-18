@@ -33,4 +33,7 @@ app.put('products/:id',db.updateProduct);
 app.delete('/products/:id',db.deleteProduct);
 app.post('/login',auth.userLogin);
 app.post('/signup',auth.userSignup);
+
+////Password reset 
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
