@@ -1,0 +1,60 @@
+.Input{
+    width: 95%;
+    padding: 5px;
+    margin: 5px;
+  
+}
+
+.Label{
+    float: left;
+    margin-left: 5px;
+    color: #FFD700;
+}
+
+.InputWrapper{
+    display: block;
+    box-sizing: border-box;
+}
+
+.Auth {
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    box-shadow:3px 5px 12px slategrey;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background-color:#191970;
+    padding: 20px;
+    color: goldenrod;
+   
+}
+
+@media (min-width: 600px) {
+    .Auth {
+        width: 500px;
+    }
+}
+
+.button {
+    transition-duration: 0.2s;
+    padding:.3em;
+    color:gold;
+    background-color:#191970;
+    font-size: medium;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    font-weight: bolder;
+  }
+  .val_error{
+      text-align: left;
+      color:darkorange;
+  }
+  .button:disabled{
+    background-color:grey;
+    font-weight: normal;
+  }

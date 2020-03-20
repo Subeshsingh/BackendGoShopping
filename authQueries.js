@@ -2,14 +2,14 @@ const Pool= require('pg').Pool;
 const formidable = require('formidable');
 const bcrypt = require('bcrypt');
 const jwt= require('jsonwebtoken');
-
+require('dotenv').config();
 // const mv = require('mv')
 const pool= new Pool({
-    user:'postgres',
-    host:'localhost',
-    database:'Database_main',
-    password:'Pass@9648',
-    port: 5432
+    user: process.env.USER_NAME,
+    host: process.env.HOST_NAME,
+    database:process.env.DB_NAME,
+    password:process.env.DB_PASSWORD,
+    port: process.env.PORT_NUMBER,
 });
 
 const userLogin = ( request , response ) => {
@@ -41,13 +41,13 @@ const userLogin = ( request , response ) => {
                         throw err
                     }
                     if(res){
-                        
+                       
                         const token=jwt.sign(
                             {
                                 userId: results.rows[0].id,
                                 email: results.rows[0].usersid,
                              },
-                             'qwerty@key',
+                             process.env.SECRET_KEY,
                              {
                                  expiresIn:'1h'
                              }
@@ -102,12 +102,13 @@ const userSignup = ( request,response ) => {
                                 throw error
                             }
                             else{
-
+                                console.log(process.env.USER + 'process.env.DATABASE' + process.env.PASSWORD + process.env.PORT + process.env.HOST + "I am env variable")
+                                console.log(process.env.SECRET_KEY);
                                 const token=jwt.sign(
                                     {
                                         email: email,
                                      },
-                                     'qwerty@key',
+                                     process.env.SECRET_KEY,
                                      {
                                          expiresIn:'1h'
                                      }

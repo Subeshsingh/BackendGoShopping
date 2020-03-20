@@ -1,0 +1,11 @@
+.container{
+    margin: 5em;
+    text-align: center;
+}
+.row{
+    margin-top: auto;
+}
+.message{
+    font-weight: bold;
+    color: #097109;
+}

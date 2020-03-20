@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/form.css">
+    </head>
+<body>
+    <div class="container">
+        <div class="Auth">
+            <form class="form" action="/reset_password/<%= id %>" method="POST" name="myform"> 
+                <h4>Please enter new password</h4>
+                <!-- style="display: none;"
+                style="display: none;" -->
+                <div class="InputWrapper" style="display: none;">
+                    <label class="Label"><%= id %></label>
+                    <input type="number" class="Input" placeholder="User ID" name="userId" name="userId" value="<%= id%>" readonly>
+                </div>  
+                <div class="InputWrapper" style="display: none;" >
+                    <label class="Label"><%= token %></label>
+                    <input type="text" class="Input" placeholder="token" name="token" name="token"  value ="<%=token%>" readonly>
+                </div>
+
+                <div class="InputWrapper">
+                    <label class="Label">New Passsword</label>
+                    <input type="password" class="Input" placeholder="New Password " name="password" id="password"
+                        onchange="passChecker()" >
+                    <div id="password_err"class="val_error"></div>
+                </div>
+                <div class="InputWrapper">
+                    <label class="Label">Confirm Password</label>
+                    <input type="password"class="Input" placeholder="Confirm Password" name="cnfpassword" id="cnfpassword"
+                        onchange="cnfpassChecker()">
+                    <div id="cnf_password_err"class="val_error"></div>
+                </div>
+                <div class="InputWrapper" style="margin-top: 0.2em;">
+                    <input type="submit" id='button'  class="button" value="SUBMIT" >
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+        function validity(){
+            let password=document.getElementById('password').value;
+            let passcheck=/^(?=.*\d)(?=.*[a-zA-Z0-9]).{8,16}$/;
+            let cnfpassword= document.getElementById('cnfpassword').value;
+            if(passcheck.test(password) && password===cnfpassword){
+                document.getElementById("button").disabled = true;
+                document.getElementById("button").disabled = false;
+            }
+        }
+
+        function passChecker(){
+            document.getElementById("button").disabled = true;
+            let password=document.getElementById('password').value;
+            let passcheck=/^(?=.*\d)(?=.*[a-zA-Z0-9]).{8,16}$/;
+            
+            if(passcheck.test(password)){
+                document.getElementById('password_err').innerHTML="";
+            }else{
+                document.getElementById('password_err').innerHTML="!! Weak Password =>example: Abc12345 min length:8";
+            }
+            validity();
+        }
+   
+        function cnfpassChecker(){
+            document.getElementById("button").disabled = true;
+            let password=document.getElementById('password').value;
+            let cnfpassword= document.getElementById('cnfpassword').value;
+            if(password===cnfpassword){
+                document.getElementById('cnf_password_err').innerHTML="";
+            }else{
+                document.getElementById('cnf_password_err').innerHTML="?Password did not match";
+            }
+            validity();
+        }
+        
+    </script>    
+</body>
+</html>
