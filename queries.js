@@ -1,12 +1,13 @@
 const Pool= require('pg').Pool;
 const formidable = require('formidable');
 const mv = require('mv')
+require('dotenv').config();
 const pool= new Pool({
-    user:'postgres',
-    host:'localhost',
-    database:'Database_main',
-    password:'Pass@9648',
-    port: 5432
+    user: process.env.USER_NAME,
+    host: process.env.HOST_NAME,
+    database:process.env.DB_NAME,
+    password:process.env.DB_PASSWORD,
+    port: process.env.PORT_NUMBER,
 });
 
 const getProducts=(request,response) =>{
