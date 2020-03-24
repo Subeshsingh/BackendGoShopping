@@ -2,6 +2,7 @@ const Pool= require('pg').Pool;
 const formidable = require('formidable');
 const mv = require('mv')
 require('dotenv').config();
+const cache = require('./middleware/cache');
 const pool= new Pool({
     user: process.env.USER_NAME,
     host: process.env.HOST_NAME,
@@ -11,15 +12,22 @@ const pool= new Pool({
 });
 
 const getProducts=(request,response) =>{
-    console.log(request.header('key'));
-   
+    // console.log(request.header('key'));
+     const data=cache.get(request);
+     if(data){
+         console.log('cached data');
+        response.status(200).json(data);
+     }else{
         pool.query('Select * From Products Order By id ASC',(error,results)=>{
-            // console.log(results)
-            if(error){
-                throw error;
-            }
-            response.status(200).json(results.rows)
-        });   
+                // console.log(results)
+                if(error){
+                    throw error;
+                }
+                cache.set(request,results.rows);
+                console.log('Fetched data');
+                response.status(200).json(results.rows)
+            });
+    }   
 }
 
 const getProductById =(request,response) =>{
@@ -78,6 +86,7 @@ const updateProduct = (request,response) =>{
     );
 };
 
+
 const deleteProduct = (request , response) =>{
     const id = parseInt(request.params.id);
     console.log("i am deleting the post number:"+ id);
@@ -115,5 +124,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     authorize,
-    getImages
+    getImages,
+   // cache
 };

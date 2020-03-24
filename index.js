@@ -11,29 +11,26 @@ const respass = require('./passreset');
 const path =require('path')
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
-
-
-
-
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:8000','http://localhost:8000/views/']
-  }));
-// app.use(express.static('views'))
 // app.use(bodyParser.json());
 // app.use(
 //     bodyParser.urlencoded({
 //         extended: true,
-//     }),
-//     fileupload()
-// );
+//     }));
+
+
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:8000','http://localhost:8000/views/']
+}));
+
+
 
 app.get('/',(request,response) =>{
     response.json({info:'Node.js,Express, and Postgres API'});
 });
 
-app.get('/products',db.getProducts);
-app.get('/uploads/:filename',db.getImages);
-app.get('/products/:id',db.getProductById);
+app.get('/products', db.getProducts);
+app.get('/uploads/:filename', db.getImages);
+app.get('/products/:id', db.getProductById);
 app.post('/products',db.createProduct);
 app.put('products/:id',db.updateProduct);
 app.delete('/products/:id',db.deleteProduct);
