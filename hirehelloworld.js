@@ -51,7 +51,6 @@ function upload_object_to_s3(uploadParams, bucket_obj) {
 
 function insert_data(data) {
     return new Promise((resolve, reject) => {
-        debugger
         db.pool.query('Insert into application_forms (name, email, message, document) values($1,$2,$3,$4)',[data.name, data.email, data.message, data.document],(err, results) => {
             if(err){
                 console.log("Error", err);
