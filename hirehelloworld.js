@@ -27,6 +27,8 @@ const submit = async (request, response) => {
 
         data = await upload_object_to_s3(uploadParams, s3)
         fields.document = data.Location
+        
+        await delete_temp_file(file.path)
 
         await insert_data(fields)
         response.status(201).send('Form submitted successfully.');
@@ -71,6 +73,15 @@ function parse_request(request) {
             }
             resolve({fields: fields, files: files})
         })
+    })
+}
+
+function delete_temp_file(file_path) {
+    return new Promise((resolve, reject) => {
+        fs.unlink(file_path, function (err) {
+            if (err) reject(err);
+            resolve(true)
+        });
     })
 }
 
