@@ -65,7 +65,7 @@ function insert_data(data) {
 
 function parse_request(request) {
     return new Promise((resolve, reject) => {
-        const form = formidable({ multiples: true });
+        const form = new formidable.IncomingForm()
         form.parse(request, (err, fields, files) => {
             if (err) {
                 console.log('parse Error', err);
