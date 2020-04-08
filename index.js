@@ -12,12 +12,6 @@ const path =require('path')
 const hirehelloworld = require('./hirehelloworld')
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
-// app.use(bodyParser.json());
-// app.use(
-//     bodyParser.urlencoded({
-//         extended: true,
-//     }));
-
 
 app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:8000','http://localhost:8000/views/']
@@ -45,7 +39,4 @@ app.post('/reset_password/:user',respass.formSubmitHandle);
 
 app.post('/submit', hirehelloworld.submit);
 
-// app.get('/form',function(req,res){
- 
-// })
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
