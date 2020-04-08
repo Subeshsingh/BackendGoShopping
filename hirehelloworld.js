@@ -7,8 +7,7 @@ const formidable = require('formidable');
 const submit = async (request, response) => {
 
     try {
-        // const credentials = new AWS.SharedIniFileCredentials({profile: 'iamratneshdev'});
-        // AWS.config.credentials = credentials
+     
         AWS.config.update({ region: 'ap-south-1' })
         const s3 = new AWS.S3({ apiVersion: '2012-10-17' })
 
