@@ -9,6 +9,7 @@ const cors= require('cors');
 const fileupload =require('express-fileupload');
 const respass = require('./passreset');
 const path =require('path')
+const hirehelloworld = require('./hirehelloworld')
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
 // app.use(bodyParser.json());
@@ -41,6 +42,8 @@ app.post('/signup',auth.userSignup);
 app.post('/reset_pw/user',respass.resetPassword);
 app.get('/reset_pw/:user/:token',respass.verifyUserResetPassLink);
 app.post('/reset_password/:user',respass.formSubmitHandle);
+
+app.post('/submit', hirehelloworld.submit);
 
 // app.get('/form',function(req,res){
  

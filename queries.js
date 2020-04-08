@@ -3,12 +3,12 @@ const formidable = require('formidable');
 const mv = require('mv')
 require('dotenv').config();
 const cache = require('./middleware/cache');
-const pool= new Pool({
+const pool = new Pool({
+    host: process.env.HOST_NAME || 'localhost',
     user: process.env.USER_NAME,
-    host: process.env.HOST_NAME,
-    database:process.env.DB_NAME,
     password:process.env.DB_PASSWORD,
-    port: process.env.PORT_NUMBER,
+    database:process.env.DB_NAME,
+    port: process.env.PORT_NUMBER || 5432,
 });
 
 const getProducts=(request,response) =>{
@@ -125,5 +125,6 @@ module.exports = {
     deleteProduct,
     authorize,
     getImages,
+    pool
    // cache
 };
