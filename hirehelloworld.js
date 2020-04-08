@@ -14,7 +14,7 @@ const submit = async (request, response) => {
         const { fields, files } = await parse_request(request)
         const file = files.document
 
-        const uploadParams = { Bucket: 'hirehelloworld.in/documents', Key: '', Body: '' }
+        const uploadParams = { Bucket: process.env.BUCKET_NAME, Key: '', Body: '' }
         const fileStream = fs.createReadStream(file.path)
         fileStream.on('error', function(err) {
             console.log('parse Error', err)
