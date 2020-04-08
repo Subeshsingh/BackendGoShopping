@@ -12,7 +12,7 @@ const pool = new Pool({
 });
 
 const getProducts=(request,response) =>{
-    // console.log(request.header('key'));
+
      const data=cache.get(request);
      if(data){
          console.log('cached data');
@@ -45,13 +45,10 @@ const createProduct = (request,response) => {
     const form = formidable({ multiples: true });
     form.parse(request, (err, fields, files) => {
         if (err) {
-            // next(err);
+
             throw err
             return
         }
-
-        console.log(files, fields);
-        // response.status(201).send(`Product added with Id`);
         
         const file = files.productimgurl;
         const path = './uploads/'+ file.name;
@@ -126,5 +123,4 @@ module.exports = {
     authorize,
     getImages,
     pool
-   // cache
 };
